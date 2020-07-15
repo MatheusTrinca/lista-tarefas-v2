@@ -21,6 +21,7 @@ function addTarefa(e){
     ul.appendChild(li);
     resultado.appendChild(ul);
     showBtn();
+    storeInLocalStorage(tarefa.value);
     tarefa.value = '';
   }else{
     alert('Campo vazio')
@@ -30,6 +31,7 @@ function addTarefa(e){
 
 function deleteTarefa(e){
   if(confirm('Tem certeza que deseja apagar?')){
+    deleteInLocalStorage(e.target.parentElement.textContent)
     e.target.parentElement.remove();
     showBtn();
   }
@@ -44,6 +46,7 @@ function limparTodos(e){
       resultado.children[0].remove();
     }
     showBtn();
+    limparLocalStorage();
   }
   e.preventDefault();
 }
@@ -61,3 +64,37 @@ function showBtn(){
   }
 }
 
+function getTarefasInLocalStorage(){
+  let tarefas;
+  if(localStorage.getItem('tarefas') === null){
+    tarefas = [];
+  }else{
+    tarefas = JSON.parse(localStorage.getItem('tarefas'));
+  }
+  return tarefas;
+}
+
+function storeInLocalStorage(tarefa){
+  let tarefas = getTarefasInLocalStorage();
+  tarefas.push(tarefa);
+  localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}
+
+function deleteInLocalStorage(tarefa){
+  console.log(tarefa);
+  
+  let tarefas = getTarefasInLocalStorage();
+  console.log(tarefas);
+  
+  tarefas.forEach((item, index) => {
+    item += 'X';
+    if(item === tarefa){
+      tarefas.splice(index, 1);
+    }
+  });
+  localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}
+
+function limparLocalStorage(){
+  localStorage.clear();
+}

@@ -1,0 +1,40 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+:root{
+  --primary-color: rgb(13,106,134);
+}
+
+*{
+  box-sizing: border-box;
+  outline: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body{
+  background-color: var(--primary-color)!important;
+}
+
+.container{
+  max-width: 600px;
+  background-color: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 1.2rem;
+}
+
+.grupo{
+  font-weight: bold;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+}
+.tarefa{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete{
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+}
